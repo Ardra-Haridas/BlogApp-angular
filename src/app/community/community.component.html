@@ -1,7 +1,7 @@
 @if(community){
     <div class="box1">
         <div class="profilecontainer">
-        <img class="profilepic" src="../../assets/community4.webp" alt="">
+        <img class="profilepic" [src]="'http://localhost:8080/api/v1/community/getcommunityImage/'+this.communityid" alt="">
         <h2>{{community.communityname}}</h2>
         <p>Description:{{community.description}}</p>
         <div class="join">

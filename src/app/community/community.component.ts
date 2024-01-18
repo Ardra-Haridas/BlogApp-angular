@@ -28,6 +28,7 @@ user:string|any
 userId: number|any;
 joinFlag:boolean|any = false
 
+
 constructor(private api:ApiService,private activatedRoute:ActivatedRoute,private router:Router){}
 
   ngOnInit(): void {
@@ -45,6 +46,7 @@ constructor(private api:ApiService,private activatedRoute:ActivatedRoute,private
     );
 }
 fetchUserBlogPost(communityid:number):void {
+ 
   if(typeof localStorage !== "undefined" && localStorage.getItem("user")){
   this.user=localStorage.getItem("user")
     this.userid=JSON.parse(this.user).id;
