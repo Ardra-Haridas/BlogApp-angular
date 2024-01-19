@@ -12,15 +12,21 @@
                     </div>
                     
                 </div>
+                
                 <div class="dropdown">
+                    @if ((userId==blogDetails.user.id)) {
                     <button class="dropbtn">
                         <i class="fa-solid fa-caret-down"></i>
                     </button>
                     <div class="dropdown-content">
                     <span (click)="editBlogpost()">Edit</span>
                     <span (click)="deleteBlogpost()">Delete</span>
+                
+                    
                     </div>
+                }
                   </div>
+                
                 
             </div>
             <div class="content">

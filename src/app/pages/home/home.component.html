@@ -26,7 +26,7 @@
 @for(community of nocommunityList;track community.id){
 <div class="boxes">
 <a [routerLink]="'/community/'+community.communityid">
-  <img src="../../../assets/community4.webp">
+    <img [src]="'http://localhost:8080/api/v1/community/getcommunityImage/'+community.communityid">
 </a>
 <div class="describe" >{{community.communityname}}</div>
 </div>
@@ -56,13 +56,16 @@
     </div>
  }
 </div>
+<div class="heading">
+<h4>Joined Communities</h4>
 @for(community of communityList;track community.id){
 <div class="box">
 <a [routerLink]="'/community/'+community.communityid">
-  <img src="../../../assets/community4.webp">
+  <img [src]="'http://localhost:8080/api/v1/community/getcommunityImage/'+community.communityid">
 </a>
 <div class="desc" >{{community.communityname}}</div>
 </div>
 }
+</div>
 </div>
 </div>

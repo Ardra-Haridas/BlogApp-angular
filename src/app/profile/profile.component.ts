@@ -26,6 +26,7 @@ bio: string|any;
 blogDetails:Blog[]|any=[]
 users:User[] |any;
 user:string|any
+currentuserid:number |any
   likeFlag:boolean|any = false
   fileName:any
   profilePic:any
@@ -36,6 +37,12 @@ ngOnInit(): void {
   this.activatedRoute.params.subscribe(s => {
     this.userid=s["id"]
   });
+  if(typeof localStorage !== "undefined" && localStorage.getItem("user")){
+    this.user=localStorage.getItem("user")
+      this.currentuserid=JSON.parse(this.user).id;
+    }
+    console.log(this.userid,this.currentuserid);
+    
   this.getUserDetails()
 }
 getUserDetails(){
@@ -50,12 +57,12 @@ getUserDetails(){
   });
 }
 fetchUserBlogPost() {
-  if(typeof localStorage !== "undefined" && localStorage.getItem("user")){
-  this.user=localStorage.getItem("user")
-    this.userid=JSON.parse(this.user).id;
-  }else{
-    this.userid=null
-  }
+  // if(typeof localStorage !== "undefined" && localStorage.getItem("user")){
+  // this.user=localStorage.getItem("user")
+  //   this.userid=JSON.parse(this.user).id;
+  // }else{
+  //   this.userid=null
+  // }
   if (this.users && this.users.id) {
     this.api.getReturn(`${environment.BASE_API_URL}/auth/${this.users.id}/blogposts`).subscribe(
       (blogpost) => {
@@ -72,7 +79,7 @@ likepost(blogId:number):void{
   this.user=localStorage.getItem("user")
   this.userid=JSON.parse(this.user).id;
   if(!this.likeFlag){
-    this.api.postReturn(`${environment.BASE_API_URL}/like/likePost/${blogId}/${this.userid}` ,null).subscribe(
+    this.api.postReturn(`${environment.BASE_API_URL}/like/likePost/${blogId}/${this.currentuserid}` ,null).subscribe(
       (response)=>{
         this.blogDetails.likes++;
         this.likeFlag = true
@@ -83,7 +90,7 @@ likepost(blogId:number):void{
   )
   }else{
     const headers = new HttpHeaders().set("ResponseType","text")
-    this.api.postReturn(`${environment.BASE_API_URL}/like/unlikePost/${blogId}/${this.userid}` ,null,{headers}).subscribe(
+    this.api.postReturn(`${environment.BASE_API_URL}/like/unlikePost/${blogId}/${this.currentuserid}` ,null,{headers}).subscribe(
       (response:any)=>{
         if(response=="success"){
           this.blogDetails.likes--;
@@ -107,7 +114,7 @@ uploadImage(event:any) {
       formData.append("imageFile", this.fileImage);
 
       const headers = new HttpHeaders().set("ResponseType","text")
-      this.api.postReturn(`${environment.BASE_API_URL}/auth/uploadImage/${this.userid}`, formData,{headers}).subscribe((data)=>{
+      this.api.postReturn(`${environment.BASE_API_URL}/auth/uploadImage/${this.currentuserid}`, formData,{headers}).subscribe((data)=>{
         console.log(data);
         const reader = new FileReader();
         reader.onload = e => this.profilePic = reader.result;

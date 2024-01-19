@@ -6,6 +6,7 @@ import { Blog, Community, User } from '../models/data-types';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { BlogComponent } from "../profile/blogdetails/blogdetails.component";
 import { HttpHeaders } from '@angular/common/http';
+import { DataService } from '../data.service';
 
 @Component({
     selector: 'app-community',
@@ -27,9 +28,11 @@ users:User[] |any;
 user:string|any
 userId: number|any;
 joinFlag:boolean|any = false
+communityImage :any
+fileImage:any
 
 
-constructor(private api:ApiService,private activatedRoute:ActivatedRoute,private router:Router){}
+constructor(private dataService: DataService,private api:ApiService,private activatedRoute:ActivatedRoute,private router:Router){}
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(s => {
@@ -38,6 +41,7 @@ constructor(private api:ApiService,private activatedRoute:ActivatedRoute,private
     this.api.getReturn(`${environment.BASE_API_URL}/community/communitybyId/${this.communityid}`).subscribe((data)=>{
       this.community=data
       console.log(this.community);
+      this.communityImage = "http://localhost:8080/api/v1/community/getcommunityImage/"+this.communityid
       this.fetchUserBlogPost(this.communityid)
       this.checkIfUserJoined();
     },(error)=>{
@@ -110,6 +114,28 @@ private checkIfUserJoined(): void {
         console.log(this.joinFlag);
         
       });
+  }
+}
+uploadImage(event:any) {
+
+  this.fileImage = event.target.files[0];
+
+  if (this.fileImage) {
+      const formData = new FormData();
+      
+      formData.append("imageFile", this.fileImage);
+
+      const headers = new HttpHeaders().set("ResponseType","text")
+      this.api.postReturn(`${environment.BASE_API_URL}/community/communityImage/${this.communityid}`, formData,{headers}).subscribe((data)=>{
+        console.log(data);
+        const reader = new FileReader();
+        reader.onload = e => this.communityImage = reader.result;
+        reader.readAsDataURL(this.fileImage)
+        this.dataService.notifyOther(this.fileImage)
+      },(error)=>{
+        console.log(error);
+      })
+      
   }
 }
 

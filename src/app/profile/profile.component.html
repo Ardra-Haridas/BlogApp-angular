@@ -3,9 +3,12 @@
     <div class="profilecontainer">
         <div class="image">
             <img class="profilepic" [src]="profilePic" alt="">
-            <label  class="plus">+
-                <input type="file" name="" id="" style="display: none;" (change)="uploadImage($event)">
-            </label>
+            @if(userid == currentuserid){
+                <label  class="plus">+
+                    <input type="file" name="" id="" style="display: none;" (change)="uploadImage($event)">
+                </label>
+            }
+            
         </div>
     
     <h2>{{users.name}}</h2>

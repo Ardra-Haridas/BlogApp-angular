@@ -1,7 +1,14 @@
 @if(community){
     <div class="box1">
         <div class="profilecontainer">
-        <img class="profilepic" [src]="'http://localhost:8080/api/v1/community/getcommunityImage/'+this.communityid" alt="">
+            <div class="image">
+        <img class="profilepic" [src]="communityImage " alt="">
+        @if(joinFlag==true){
+        <label  class="plus">+
+            <input type="file" name="" id="" style="display: none;" (change)="uploadImage($event)">
+        </label>
+    }
+    </div>
         <h2>{{community.communityname}}</h2>
         <p>Description:{{community.description}}</p>
         <div class="join">
@@ -38,7 +45,7 @@
                 <p>Create a unique and beautiful blog easily.</p>
             </div>
         <div class="sidebuttons">
-            <a  class="createbutton"(click)="createCommunityBlog()">Create</a>
+            <a class="createbutton"(click)="createCommunityBlog()">Create</a>
         </div>
         </div>
 </div>

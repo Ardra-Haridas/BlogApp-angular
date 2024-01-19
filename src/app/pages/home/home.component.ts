@@ -74,25 +74,23 @@ export class HomeComponent implements OnInit{
     const userData={
       communityname:formValues.communityname,
       description:formValues.description,
-      userId:this.userId,
-      communityid:this.communityid ? this.communityid : null
+      userid:this.userId
     }
     console.log(userData);
-    const headers = new HttpHeaders().set("ResponseType","text")
     this.api.postReturn(`${environment.BASE_API_URL}/community/create`,userData).subscribe((data:any)=>{
       console.log(data);
       if(this.fileImage){
         const formData = new FormData();
         formData.append("imageFile", this.fileImage);    
         const headers = new HttpHeaders().set("ResponseType","text")
-        this.api.postReturn(`${environment.BASE_API_URL}/community/communityImage/${data.id}`, formData,{headers}).subscribe((data)=>{
+        this.api.postReturn(`${environment.BASE_API_URL}/community/communityImage/${data.communityid}`, formData,{headers}).subscribe((data)=>{
           console.log(data);
         },(error)=>{
           console.log(error);
         })
       }
       this.communityCreationSuccess=true;
-      this.router.navigate(['/Community',data])
+      this.router.navigate([`/community/${data.communityid}`])
 
     },
     (error)=>{

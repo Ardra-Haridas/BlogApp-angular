@@ -1,6 +1,29 @@
 .profilecontainer{
     text-align: center;
     background-color: rgb(255, 223, 223);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+.image{
+    width: 150px;
+    height: 150px;
+    position: relative;
+}
+.image .plus{
+    position: absolute;
+    bottom: 5px;
+    border-radius: 50%;
+    right: 5px;
+    width: 30px;
+    height: 30px;
+    background-color: rgb(32, 128, 169);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
 }
 .profilepic{
     width: 150px;
@@ -47,7 +70,6 @@
 
 
 .joinbutton {
-    width: 5%;
     border: none;
     padding: 10px;
     margin-bottom: 10px;
