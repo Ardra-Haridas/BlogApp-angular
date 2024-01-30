@@ -6,8 +6,8 @@ import { BlogComponent } from './pages/blog/blog.component';
 import { CreateblogComponent } from './createblog/createblog.component';
 import { CommunityComponent } from './community/community.component';
 import { AboutComponent } from './about/about.component';
-import { ContactComponent } from './contact/contact.component';
 import { ProfileComponent } from './profile/profile.component';
+import { ModalComponent } from './modal/modal.component';
 
 export const routes: Routes = [
     {
@@ -55,13 +55,14 @@ export const routes: Routes = [
         component:AboutComponent,
         title:"About |BlogApp"
     },
-    {
-        path:"contact",
-        component:ContactComponent,
-        title:"Contact |BlogApp"
-    },
+   
     {
         path:"profile/:id",
+        component:ProfileComponent,
+        title:"Profile |BlogApp"
+    },
+    {
+        path:"editprofile/:id",
         component:ProfileComponent,
         title:"Profile |BlogApp"
     },

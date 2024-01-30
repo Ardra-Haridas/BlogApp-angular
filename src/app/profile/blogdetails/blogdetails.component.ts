@@ -7,14 +7,14 @@ import { environment } from '../../../environments/environment.development';
 import { HttpHeaders } from '@angular/common/http';
 import { error } from 'console';
 import { DataService } from '../../data.service';
-import { CommentComponent } from "../../pages/blog/comment/comment.component";
+import { CommentAreaComponent } from "../../pages/blog/comment/comment-area.component";
 
 @Component({
     selector: 'app-blogdetails',
     standalone: true,
     templateUrl: './blogdetails.component.html',
     styleUrl: './blogdetails.component.scss',
-    imports: [CommonModule, RouterModule, CommentComponent]
+    imports: [CommonModule, RouterModule, CommentAreaComponent]
 })
 export class BlogComponent implements OnInit{
 
@@ -86,6 +86,7 @@ export class BlogComponent implements OnInit{
    this.api.deleteReturn(`${environment.BASE_API_URL}/post/delete/${this.blogId}`).subscribe(
     (data)=>{
       console.log('deleted Post Successfully',data)
+      this.ngOnInit()
     },
     (error)=>{
       console.log('error deleting post',error)

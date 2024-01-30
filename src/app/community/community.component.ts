@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewContainerRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ApiService } from '../api.service';
 import { environment } from '../../environments/environment.development';
@@ -7,6 +7,7 @@ import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { BlogComponent } from "../profile/blogdetails/blogdetails.component";
 import { HttpHeaders } from '@angular/common/http';
 import { DataService } from '../data.service';
+import { ModalService } from '../modal.service';
 
 @Component({
     selector: 'app-community',
@@ -32,7 +33,7 @@ communityImage :any
 fileImage:any
 
 
-constructor(private dataService: DataService,private api:ApiService,private activatedRoute:ActivatedRoute,private router:Router){}
+constructor(private dataService: DataService,private api:ApiService,private modalService:ModalService,private activatedRoute:ActivatedRoute,private router:Router,private viewContainerRef:ViewContainerRef){}
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(s => {
@@ -41,7 +42,7 @@ constructor(private dataService: DataService,private api:ApiService,private acti
     this.api.getReturn(`${environment.BASE_API_URL}/community/communitybyId/${this.communityid}`).subscribe((data)=>{
       this.community=data
       console.log(this.community);
-      this.communityImage = "http://localhost:8080/api/v1/community/getcommunityImage/"+this.communityid
+      this.communityImage = "http://localhost:8080/api/v1/community/getCommunityImage/"+this.communityid
       this.fetchUserBlogPost(this.communityid)
       this.checkIfUserJoined();
     },(error)=>{
@@ -116,7 +117,7 @@ private checkIfUserJoined(): void {
       });
   }
 }
-uploadImage(event:any) {
+uploadCommunityImage(event:any) {
 
   this.fileImage = event.target.files[0];
 
@@ -126,17 +127,31 @@ uploadImage(event:any) {
       formData.append("imageFile", this.fileImage);
 
       const headers = new HttpHeaders().set("ResponseType","text")
-      this.api.postReturn(`${environment.BASE_API_URL}/community/communityImage/${this.communityid}`, formData,{headers}).subscribe((data)=>{
+      this.api.postReturn(`${environment.BASE_API_URL}/community/uploadCommunityImage/${this.communityid}`, formData,{headers}).subscribe((data)=>{
         console.log(data);
         const reader = new FileReader();
         reader.onload = e => this.communityImage = reader.result;
         reader.readAsDataURL(this.fileImage)
-        this.dataService.notifyOther(this.fileImage)
+        
       },(error)=>{
         console.log(error);
       })
       
   }
 }
-
+editCommunityProfile(){
+  this.modalService.setRootViewContainerRef(this.viewContainerRef);
+   this.modalService.addDynamicComponent("editCommunityProfile", {
+     communityname:this.community.communityname,
+     description:this.community.description,
+     id:this.community.communityid
+   }).then((value)=>{
+     if(value){
+       this.ngOnInit()
+     }
+   }).catch((error)=>{
+     console.log(error);
+     
+   });
+ }
 }

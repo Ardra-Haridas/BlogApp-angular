@@ -1,0 +1,10 @@
+<div class="createbar">
+    <h3>Profile Edit</h3>
+    <form [formGroup]="profileForm"class="editprofile">
+        <h4>Name :</h4>
+    <input type="text" name="name" placeholder="name" required formControlName="name">
+    <h4>Bio:</h4>
+    <textarea name="bio" class="description" placeholder="bio" required formControlName="bio" ></textarea>
+    <button  class="button" (click)="onEdit()" >Edit</button>
+</form>
+</div>

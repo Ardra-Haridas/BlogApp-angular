@@ -65,7 +65,7 @@ export class HomeComponent implements OnInit{
       description:['',Validators.required],
       profilepic:['',Validators.required]
     });
-    this.communityImage = "http://localhost:8080/api/v1/community/getcommunityImage/"+this.communityid
+    this.communityImage = "http://localhost:8080/api/v1/community/getCommunityImage/"+this.communityid
     console.log(this.fileImage);
 
   }
@@ -83,7 +83,7 @@ export class HomeComponent implements OnInit{
         const formData = new FormData();
         formData.append("imageFile", this.fileImage);    
         const headers = new HttpHeaders().set("ResponseType","text")
-        this.api.postReturn(`${environment.BASE_API_URL}/community/communityImage/${data.communityid}`, formData,{headers}).subscribe((data)=>{
+        this.api.postReturn(`${environment.BASE_API_URL}/community/uploadCommunityImage/${data.communityid}`, formData,{headers}).subscribe((data)=>{
           console.log(data);
         },(error)=>{
           console.log(error);

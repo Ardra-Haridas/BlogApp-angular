@@ -12,9 +12,22 @@
   padding: 10px;
   background-color: #fff;
 }
+.comment-list{
+  display: flex;
+  gap: 5px;
+  flex-direction: column;
+  width: 100%;
+}
 
 .comment-item {
 
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 10px;
+  background-color: white;
+}
+.reply-item{
+  margin-left: 20px;
   border: 1px solid #ddd;
   border-radius: 8px;
   padding: 10px;
@@ -27,6 +40,15 @@
 
 .comment-item .comment-content {
   color: #333; 
+}
+.fa-xmark{
+  cursor: pointer;
+  font-size: 18px;
+  color: red;
+  margin-right: 10px;
+}
+.fa-xmark:hover{
+  color: black;
 }
 .cursor{
   

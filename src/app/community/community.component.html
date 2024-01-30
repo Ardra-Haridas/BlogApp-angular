@@ -1,11 +1,26 @@
 @if(community){
     <div class="box1">
+        
         <div class="profilecontainer">
+            @if (joinFlag==true) {
+                <div class="settings">
+                    <div class="dropdown">
+                        <button class="dropbtn">
+                            <i class="fa-solid fa-ellipsis"></i>
+                        </button>
+                        <div class="dropdown-content">
+                        <span (click)="editCommunityProfile()">Edit Profile</span>
+                     
+                        <span>Delete Group</span>
+                        </div>
+                      </div>
+            </div>
+        }
             <div class="image">
         <img class="profilepic" [src]="communityImage " alt="">
         @if(joinFlag==true){
         <label  class="plus">+
-            <input type="file" name="" id="" style="display: none;" (change)="uploadImage($event)">
+            <input type="file" name="" id="" style="display: none;" (change)="uploadCommunityImage($event)">
         </label>
     }
     </div>
@@ -20,6 +35,7 @@
                     Join
                 }
             </button>
+      
             </ng-container>
           </div>
     </div>

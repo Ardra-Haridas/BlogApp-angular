@@ -1,0 +1,14 @@
+
+<div class="modal">
+    <div class="modal-overlay" (click)="close($event)"></div>
+    <div class="modal--modal-content">
+        @if(modalTitle=="editProfile"){
+            <app-edit-profile [profileDetails]="modalText" (editSuccessEvent)="onEditSuccess($event)"></app-edit-profile>
+        }
+        @else if (modalTitle=="editCommunityProfile") {
+          <app-edit-community [communityDetails]="modalText" (editSuccessEvent)="onEditSuccess($event)"></app-edit-community>
+        }
+      <a class="modal--close-btn" (click)="close($event)">X</a>
+    </div>
+  </div>
+   

@@ -8,12 +8,15 @@
         </div>
         <div class="right">
             @if(username){
-                <img class="profileicon"  [src]="userProfile" alt="user2">
-           
-
-                <p (click)="profileDetails(userId)">{{username}}</p>
-
+                <span [routerLink]="'/createblog'">Create Blog</span>
+                <span [routerLink]="'/about'" class="button">About Us</span>
+                <span [routerLink]="'/contact'" class="button">Contact Us</span>
                 <span (click)="logout()">Logout</span>
+                <img class="profileicon" (click)="profileDetails(userId)"  [src]="userProfile" alt="user2">
+           
+               
+
+                
             }@else {
                 <span [routerLink]="'/login'" href="">Login</span>
                 <span  [routerLink]="'/register'" href="">Sign Up</span>

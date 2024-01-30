@@ -6,12 +6,12 @@ import { ActivatedRoute } from '@angular/router';
 import { error, log } from 'console';
 import { Blog } from '../../models/data-types';;
 import { HttpHeaders } from '@angular/common/http';
-import { CommentComponent } from './comment/comment.component';
+import { CommentAreaComponent } from './comment/comment-area.component';
 
 @Component({
   selector: 'app-blog',
   standalone: true,
-  imports: [CommonModule,CommentComponent],
+  imports: [CommonModule,CommentAreaComponent],
   templateUrl: './blog.component.html',
   styleUrl: './blog.component.scss'
 })

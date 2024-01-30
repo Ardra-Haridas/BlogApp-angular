@@ -30,7 +30,10 @@
                 
             </div>
             <div class="content">
-                <img class="blogimage"[src]="'http://localhost:8080/api/v1/post/getImage/'+blogDetails.id" alt="">
+                @if (blogDetails.image) {
+                    <img class="blogimage"[src]="'http://localhost:8080/api/v1/post/getImage/'+blogDetails.id" alt="">
+
+                }
                 <p class="para">{{blogDetails.content}}</p>
                 <div class="flex">
                     <div class="cursor2">

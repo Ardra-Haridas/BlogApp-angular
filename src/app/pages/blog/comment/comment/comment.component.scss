@@ -1,0 +1,135 @@
+.comment-session{
+    width: 100%;
+   
+    padding: 10px;
+    
+  }
+  
+  .comment-box {
+    width: 100%;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 10px;
+    background-color: #fff;
+  }
+  .comment-list{
+    display: flex;
+    gap: 5px;
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  .comment-item {
+  
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 10px;
+    background-color: white;
+  }
+  .reply-item{
+    margin-left: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 10px;
+  }
+  
+  .comment-item .comment-user {
+    font-weight: bold;
+    margin-right: 8px;
+  }
+  
+  .comment-item .comment-content {
+    color: #333; 
+  }
+  .fa-xmark{
+    cursor: pointer;
+    font-size: 18px;
+    color: red;
+    margin-right: 10px;
+  }
+  .fa-xmark:hover{
+    color: black;
+  }
+  .cursor{
+    
+     cursor: pointer;
+     color: #fff;
+     display: flex;
+     align-items: flex-end;
+     flex-direction: column;
+    
+   }
+   .cursor i{
+    margin-right: 4px;
+    text-shadow: 1px 1px 2px black, 0 0 25px red, 0 0 5px darkred;
+  
+  }
+  
+  .newcomment {
+    margin-top: 20px;
+  }
+  
+  textarea {
+    width: 90%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-bottom: 10px;
+  }
+  
+  button {
+    display: flex;
+    align-items: center;
+    background-color: #bd0887;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+  
+  }
+  
+  button:hover {
+    background-color: #bd0887;
+  }
+  .com{
+    margin-bottom: 10px;
+    position: relative;
+  }
+  .com textarea {
+    width: 80%;
+    margin-bottom: 10px;
+  } 
+  .com i.fa-solid.fa-trash{
+    position: absolute;
+    
+    right: 10px;
+  
+  cursor: pointer;
+  }
+  .cursor:hover{
+    color: red;
+  }
+  
+  
+  .red{
+    color: red;
+  }
+  i.fa-solid.fa-reply{
+    cursor: pointer;
+  
+  }
+  i.fa-solid.fa-trash{
+    margin-left: 10px;
+    cursor: pointer;
+  }
+  i.fa-regular.fa-pen-to-square{
+    cursor: pointer;
+    margin-left: 10px;
+  }
+  .join{
+    
+  }
+  app-comment{
+    margin-bottom: 5px;
+  }
+  

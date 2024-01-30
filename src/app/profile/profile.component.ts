@@ -1,14 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewContainerRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ApiService } from '../api.service';
 import { ActivatedRoute } from '@angular/router';
 import { environment } from '../../environments/environment.development';
 import { error, log } from 'console';
-import { Blog, User } from '../models/data-types';
+import { Blog, Community, User } from '../models/data-types';
 import { Router, RouterModule } from '@angular/router';
 import { HttpHeaders } from '@angular/common/http';
 import { BlogComponent } from './blogdetails/blogdetails.component';
 import { DataService } from '../data.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ModalService } from '../modal.service';
 
 @Component({
   selector: 'app-profile',
@@ -32,8 +34,14 @@ currentuserid:number |any
   profilePic:any
   fileImage:any
   userDetails:any
-constructor(private dataService: DataService,private api:ApiService,private activatedRoute:ActivatedRoute,private router:Router){}
+  userId: number|any;
+  communityList: Community[] |any
+  communityImage:any
+  communityid: number| any;
+  communityForm:FormGroup|any;
+constructor(private dataService: DataService,private modalService:ModalService,private api:ApiService,private activatedRoute:ActivatedRoute,private router:Router,private fb:FormBuilder,private viewContainerRef:ViewContainerRef){}
 ngOnInit(): void {
+  this.communityImage='https://static.vecteezy.com/system/resources/previews/004/141/669/original/no-photo-or-blank-image-icon-loading-images-or-missing-image-mark-image-not-available-or-image-coming-soon-sign-simple-nature-silhouette-in-frame-isolated-illustration-vector.jpg'
   this.activatedRoute.params.subscribe(s => {
     this.userid=s["id"]
   });
@@ -41,11 +49,33 @@ ngOnInit(): void {
     this.user=localStorage.getItem("user")
       this.currentuserid=JSON.parse(this.user).id;
     }
-    console.log(this.userid,this.currentuserid);
     
   this.getUserDetails()
+  this.user=localStorage.getItem("user")
+  this.userId=JSON.parse(this.user).id;
+  this.api.getReturn(`${environment.BASE_API_URL}/community/joinedCommunities/${this.userId}`).subscribe((data:any)=>{
+    this.communityList=data
+    console.log(this.communityList);
+  },(error)=>{
+    console.log(error);
+  }
+  );
+  this.activatedRoute.params.subscribe(s=>{
+    this.communityid=s["communityid"]
+  });
+  this.communityForm=this.fb.group({
+    communityname:['',Validators.required],
+    description:['',Validators.required],
+    profilepic:['',Validators.required]
+  });
+  this.communityImage = "http://localhost:8080/api/v1/community/getCommunityImage/"+this.communityid
+  console.log(this.fileImage);
 }
 getUserDetails(){
+  if(typeof localStorage !== "undefined" && localStorage.getItem("user")){
+    this.user=localStorage.getItem("user")
+    this.currentuserid=JSON.parse(this.user).id;
+  }
   this.api.getReturn(`${environment.BASE_API_URL}/auth/userbyId/${this.userid}`).subscribe((data)=>{
     this.users=data
     this.profilePic=`${environment.BASE_API_URL}/auth/getImage/${this.userid}`
@@ -126,6 +156,20 @@ uploadImage(event:any) {
       
   }
 }
-
-
+editProfile(){
+ this.modalService.setRootViewContainerRef(this.viewContainerRef);
+  this.modalService.addDynamicComponent("editProfile", {
+    name:this.users.name,
+    bio:this.users.bio
+  }).then((value)=>{
+    if(value){
+      this.ngOnInit()
+    }
+  }).catch((error)=>{
+    console.log(error);
+    
+  });
 }
+}
+
+

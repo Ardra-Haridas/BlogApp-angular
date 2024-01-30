@@ -1,0 +1,52 @@
+.createbar{
+    width: 500px;
+    height: 350px;
+}
+
+
+.createbar input {
+    margin-left: 10px;
+    margin-top: 10px;
+    width: 60%;
+    padding: 8px;
+    border: 1px solid #161515;
+    border-radius: 4px;
+}
+.createbar textarea {
+    margin-left: 10px;
+    margin-top: 10px;
+    width: 60%;
+    padding: 8px;
+    border: 1px solid #161515;
+    border-radius: 4px;
+}
+.createbar button {
+    width: 20%;
+    padding: 8px;
+    border: 1px solid rgb(171, 73, 12);
+    background-color: rgb(171, 73, 12);
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 500px;
+    margin-left: 10px;
+    margin-top: 5px;
+}
+.createbar h3{
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 170px;
+    height: 35px;
+    margin: 35px auto;
+    position: inherit;
+    box-shadow: 0 0 20px 9px #ff61241f;
+    border-radius: 30px;
+    text-align: center;
+    background:#ffad06;
+}
+.createbar h4{
+   margin-left: 10px;
+    color: #000;
+}

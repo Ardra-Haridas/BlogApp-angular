@@ -1,0 +1,10 @@
+<div class="createbar">
+    <h3>Profile Edit</h3>
+    <form [formGroup]="communityprofileForm"class="editprofile">
+        <h4>Name :</h4>
+    <input type="text" name="name" placeholder="name" required formControlName="communityname">
+    <h4>Description:</h4>
+    <textarea name="description" class="description" placeholder="bio" required formControlName="description" ></textarea>
+    <button  class="button" (click)="onEditCommunity()" >Edit</button>
+</form>
+</div>

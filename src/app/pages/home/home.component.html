@@ -13,31 +13,18 @@
                     <p class="content">{{blog.content}}</p>
                     <a (click)="goToBlogDetails(blog.id)" class="readmore">Read More...</a>
                 </div>
-                <img class="blogimage" [src]="'http://localhost:8080/api/v1/post/getImage/'+blog.id" alt="">
+                @if (blog.image) {
+                    <img class="blogimage"[src]="'http://localhost:8080/api/v1/post/getImage/'+blog.id" alt="">
+
+                }
             </div>
         </div>
     }
 </div>
-<div class="middle">
-    <div class="searchbar">
-        <input type="text" placeholder="Search..." name="search">
-        <button type="submit">Go</button>
-    </div>
-@for(community of nocommunityList;track community.id){
-<div class="boxes">
-<a [routerLink]="'/community/'+community.communityid">
-    <img [src]="'http://localhost:8080/api/v1/community/getcommunityImage/'+community.communityid">
-</a>
-<div class="describe" >{{community.communityname}}</div>
-</div>
-}
-</div>
+
 <div class="sidebar">
     
 <div class="sidebuttons">
-    <a [routerLink]="'/createblog'" class="createbutton">Create</a>
-    <a [routerLink]="'/about'" class="button">About Us</a>
-    <a [routerLink]="'/contact'" class="button">Contact Us</a>
     @if(communityCreationSuccess){
         @if(errorMessage){
             {{errorMessage}}
@@ -57,11 +44,11 @@
  }
 </div>
 <div class="heading">
-<h4>Joined Communities</h4>
-@for(community of communityList;track community.id){
+<h4>Communities Suggestions</h4>
+@for(community of nocommunityList;track community.id){
 <div class="box">
 <a [routerLink]="'/community/'+community.communityid">
-  <img [src]="'http://localhost:8080/api/v1/community/getcommunityImage/'+community.communityid">
+  <img [src]="'http://localhost:8080/api/v1/community/getCommunityImage/'+community.communityid">
 </a>
 <div class="desc" >{{community.communityname}}</div>
 </div>

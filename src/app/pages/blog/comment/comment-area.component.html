@@ -1,0 +1,20 @@
+<div class="comment-session">
+    <div class="comment-list">
+        @for(comment of comments;track comment.id){
+            <app-comment [comment]="comment" [allComments]="allComments"></app-comment>
+        }       
+   <div class="newcomment">
+    <form [formGroup]="commentForm">
+        @if(isReplyOpened){
+            <i (click)="closeReply()" class="fa-solid fa-xmark"></i><span>Reply to {{replyUser}}, :{{replyComment}}</span>
+        }
+        <textarea type="text" placeholder="Add a comment" required formControlName="content"></textarea>
+        @if (!isEdit) {
+            <button (click)="addComment()" type="submit">Add Comment</button>
+        }@else {
+            <button (click)="onEdit()" type="submit">Edit Comment</button>
+        }
+    </form>
+    </div>
+</div>
+</div>

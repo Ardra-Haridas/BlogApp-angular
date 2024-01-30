@@ -1,6 +1,18 @@
 @if(users){
 <div class="box1">
     <div class="profilecontainer">
+        <div class="settings">
+            <div class="dropdown">
+                <button class="dropbtn">
+                    <i class="fa-solid fa-ellipsis"></i>
+                </button>
+                <div class="dropdown-content">
+                <span (click)="editProfile()">Edit Profile</span>
+             
+                <span>Delete Account</span>
+                </div>
+              </div>
+    </div>
         <div class="image">
             <img class="profilepic" [src]="profilePic" alt="">
             @if(userid == currentuserid){
@@ -28,7 +40,9 @@
         
         }
     </div>
+    
 <div class="sidebar">
+   <div class="create">
     <div class="content">
         <h2>Publish your passions, your way</h2>
         <p>Create a unique and beautiful blog easily.</p>
@@ -36,6 +50,17 @@
 <div class="sidebuttons">
     <a [routerLink]="'/createblog'" class="createbutton">Create</a>
 </div>
-
+</div>
+<div class="heading">
+    <h4>Joined Communities</h4>
+    @for(community of communityList;track community.id){
+    <div class="box">
+    <a [routerLink]="'/community/'+community.communityid">
+      <img [src]="'http://localhost:8080/api/v1/community/getCommunityImage/'+community.communityid">
+    </a>
+    <div class="desc" >{{community.communityname}}</div>
+    </div>
+    }
+    </div>
 </div>
 </div>
